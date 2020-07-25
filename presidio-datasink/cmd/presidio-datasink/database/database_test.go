@@ -3,9 +3,9 @@ package database
 import (
 	"testing"
 
-	"github.com/go-xorm/xorm"
 	_ "github.com/mattn/go-sqlite3"
 	"github.com/stretchr/testify/assert"
+	"xorm.io/xorm"
 
 	types "github.com/Microsoft/presidio-genproto/golang"
 )
