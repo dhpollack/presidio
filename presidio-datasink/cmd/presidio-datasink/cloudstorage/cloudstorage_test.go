@@ -1,4 +1,4 @@
-package cloudStorage
+package cloudstorage
 
 import (
 	"testing"

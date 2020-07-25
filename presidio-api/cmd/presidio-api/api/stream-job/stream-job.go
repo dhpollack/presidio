@@ -34,7 +34,7 @@ func invokeStreamsJobScheduler(ctx context.Context, services presidio.ServicesAP
 }
 
 func getStreamsJobRequest(api *store.API, jobAPIRequest *types.StreamsJobApiRequest, project string) (*types.StreamsJobRequest, error) {
-	streamsJobRequest := &types.StreamsJobRequest{}
+	var streamsJobRequest *types.StreamsJobRequest
 
 	if jobAPIRequest.GetStreamsJobTemplateId() != "" {
 		jobTemplate := &types.StreamsJobTemplate{}

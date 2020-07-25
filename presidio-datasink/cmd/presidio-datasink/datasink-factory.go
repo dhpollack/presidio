@@ -18,7 +18,7 @@ func createDatasink(datasink *types.Datasink, resultType string) (datasinkInterf
 		}
 		return database.New(datasink, resultType), nil
 	} else if datasink.GetCloudStorageConfig() != nil {
-		return cloudStorage.New(datasink), nil
+		return cloudstorage.New(datasink), nil
 	} else if datasink.GetStreamConfig() != nil {
 		return stream.New(datasink), nil
 	}
