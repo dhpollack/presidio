@@ -7,7 +7,7 @@ import (
 	_ "github.com/denisenkom/go-mssqldb"
 	// import mysql driver
 	_ "github.com/go-sql-driver/mysql"
-	"github.com/go-xorm/xorm"
+	"xorm.io/xorm"
 
 	// import postgresql driver
 	_ "github.com/lib/pq"
