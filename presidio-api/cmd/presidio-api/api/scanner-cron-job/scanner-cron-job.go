@@ -36,8 +36,8 @@ func invokeScannerCronJobScheduler(ctx context.Context, services presidio.Servic
 }
 
 func getScannerCronJobRequest(api *store.API, cronJobAPIRequest *types.ScannerCronJobApiRequest, project string) (*types.ScannerCronJobRequest, error) {
-	scanRequest := &types.ScanRequest{}
-	trigger := &types.Trigger{}
+	var scanRequest *types.ScanRequest
+	var trigger *types.Trigger
 	var name string
 
 	if cronJobAPIRequest.ScannerCronJobTemplateId != "" {
