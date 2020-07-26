@@ -20,7 +20,7 @@ variables:
   - name: MODULEPATH
     value: '$(GOPATH)/src/github.com/$(build.repository.name)'
   - name: GOROOT
-    value: '/usr/local/go1.11'
+    value: '/usr/local/go1.14'
   - name: PYTHON.VERSION
     value: '3.7'
 
