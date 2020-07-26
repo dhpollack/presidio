@@ -14,10 +14,14 @@ steps:
     command: 'get'
     arguments: '-d'
     workingDirectory: '$(System.DefaultWorkingDirectory)'
+- bash: |
+    make build
+  workingDirectory: '$(System.DefaultWorkingDirectory)'
+  displayName: "make build"
 - task: Go@0
   inputs:
     command: 'build'
-    workingDirectory: '$(System.DefaultWorkingDirectory)'
+    workingDirectory: '$(System.DefaultWorkingDirectory)/presidio-anonymizer/cmd/presidio-anonymizer/'
 - task: CopyFiles@2
   inputs:
     TargetFolder: '$(Build.ArtifactStagingDirectory)'
@@ -31,3 +35,4 @@ steps:
     workingDirectory: '$(modulePath)'
 - bash: |
     golangci-lint run ./...
+  workingDirectory: '$(System.DefaultWorkingDirectory)'
