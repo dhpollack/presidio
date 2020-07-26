@@ -4,16 +4,11 @@ pool:
 steps: 
 - task: GoTool@0
   inputs:
-    version: '1.13.5'
+    version: '1.14.6'
 - bash: |
     wget -O- -nv https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s v1.27.0
   workingDirectory: '$(System.DefaultWorkingDirectory)'
   displayName: "Download golangci-lint"
-- task: Go@0
-  inputs:
-    command: 'get'
-    arguments: '-d'
-    workingDirectory: '$(System.DefaultWorkingDirectory)'
 - bash: |
     make build
   workingDirectory: '$(System.DefaultWorkingDirectory)'
@@ -24,11 +19,10 @@ steps:
 - task: PublishBuildArtifacts@1
   inputs:
      artifactName: drop
-- task: Go@0
-  inputs:
-    command: 'test'
-    arguments: '-v'
-    workingDirectory: '$(modulePath)'
+- bash: |
+    make go-test
+  workingDirectory: '$(System.DefaultWorkingDirectory)'
+  displayName: "make go-test"
 - bash: |
     golangci-lint run ./...
   workingDirectory: '$(System.DefaultWorkingDirectory)'
