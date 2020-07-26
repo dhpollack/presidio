@@ -1,0 +1,21 @@
+# Basic Config from Example (https://github.com/golangci/golangci-lint/blob/master/.golangci.yml)
+linters:
+  disable-all: true
+  enable:
+    - deadcode
+    - gofmt
+    - gocyclo
+    - goimports
+    - golint
+    - ineffassign
+    - misspell
+    - vet
+run:
+  skip-dirs:
+    - "presidio-api/cmd/presidio-api/docs"
+# golangci.com configuration
+# https://github.com/golangci/golangci/wiki/Configuration
+service:
+  golangci-lint-version: 1.27.0 # use the fixed version to not introduce new linters unexpectedly
+  prepare:
+    - echo "presidio repo is being linted..."

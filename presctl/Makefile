@@ -25,5 +25,5 @@ build: $(TARGET)
 clean:
 	@rm -f $(TARGET)
 
-go-test-style:
-	gometalinter --config ../gometalinter.json ./...
+go-lint:
+	golangci-lint run ./...

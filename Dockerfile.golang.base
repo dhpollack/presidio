@@ -4,9 +4,9 @@ ARG PRESIDIO_DEPS_LABEL=latest
 FROM ${REGISTRY}/presidio-golang-deps:${PRESIDIO_DEPS_LABEL}
 
 
-COPY Gopkg.lock Gopkg.toml $GOPATH/src/github.com/Microsoft/presidio/
+COPY go.mod $GOPATH/src/github.com/Microsoft/presidio/
 WORKDIR $GOPATH/src/github.com/Microsoft/presidio
-RUN dep ensure -vendor-only
+RUN go mod tidy
 
 ADD . $GOPATH/src/github.com/Microsoft/presidio
 RUN make go-test

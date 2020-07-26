@@ -156,7 +156,7 @@ python-test-unit:
 
 # All non-functional go tests
 .PHONY: go-test
-# go-test: go-test-style # opting this out until fixing bug https://github.com/microsoft/presidio/issues/262
+# go-test: go-lint # current repo has this disabled
 go-test: go-test-unit
 # Unit tests. Local only.
 .PHONY: go-test-unit
@@ -214,16 +214,15 @@ endif
 	-docker rm test-presidio-recognizers-store -f
 	-docker network rm testnetwork
 
-
-.PHONY: go-test-style
-go-test-style:
-	gometalinter --config ./gometalinter.json `go list ./... | grep -v /presctl`
+.PHONY: go-lint
+go-lint:
+	golangci-lint run ./...
 
 .PHONY: go-format
 go-format:
 	go list -f '{{.Dir}}' ./... | xargs goimports -w -local github.com/microsoft/presidio
 
-HAS_GOMETALINTER := $(shell command -v gometalinter 2>/dev/null)
+HAS_GOLANGCILINT         := $(shell golangci-lint -v 2>/dev/null)
 HAS_GIT          := $(shell command -v git 2>/dev/null)
 HAS_DOCKER		 := $(shell command -v docker 2>/dev/null)
 
@@ -232,10 +231,10 @@ ifndef HAS_GIT
 	$(error You must install git)
 endif
 ifndef HAS_DOCKER
-	$(error You must install Docker)
+	$(echo You must install Docker)
 endif
-ifndef HAS_GOMETALINTER
-	curl -L https://git.io/vp6lP | sh
+ifndef HAS_GOLANGCILINT
+	curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b $(go env GOPATH)/bin v1.27.0
 endif
 
 .PHONY: bootstrap
