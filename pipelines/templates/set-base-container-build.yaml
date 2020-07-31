@@ -28,7 +28,7 @@ steps:
         echo "$FILE_CHANGE_SET"
     
         # if git diff detects commits made to the deps files we build the dep containerss
-        if [[ ! -z "$(echo $FILE_CHANGE_SET | grep -e "Gopkg.lock" -e "Gopkg.toml" -e "Dockerfile.python.deps" -e "Dockerfile.golang.deps" -e "Dockerfile.python.deps" -e "presidio-analyzer/Pipfile" -e "presidio-analyzer/Pipfile.lock")" ]]; then
+        if [[ ! -z "$(echo $FILE_CHANGE_SET | grep -e 'go.mod' -e 'Dockerfile.python.deps' -e 'Dockerfile.golang.deps' -e 'Dockerfile.python.deps' -e 'presidio-analyzer/Pipfile' -e 'presidio-analyzer/Pipfile.lock')" ]]; then
             echo "Performing build deps."
             BUILD_DEPS=true
             DEPS_LABEL=$(Build.BuildId)
