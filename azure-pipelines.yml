@@ -7,7 +7,7 @@ variables:
   GOBIN: "$(GOPATH)/bin"
   GOPATH: "$(system.defaultWorkingDirectory)/gopath"
   modulePath: "$(GOPATH)/src/github.com/$(build.repository.name)"
-  GOROOT: "/usr/local/go1.11"
+  GOROOT: "/usr/local/go1.14"
 steps:
   - task: Docker@1
     displayName: "ACR Login"
@@ -17,7 +17,7 @@ steps:
       command: login
   - task: GoTool@0
     inputs:
-      version: '1.13.5'
+      version: '1.14.6'
     displayName: "Setup Go Env - Go Tool"
   - bash: |
       mkdir -p '$(GOBIN)'
@@ -29,8 +29,8 @@ steps:
       echo '##vso[task.prependpath]$(GOROOT)/bin'
     displayName: "Prepare directories"
   - bash: |
-      curl https://raw.githubusercontent.com/golang/dep/master/install.sh | sh
-      dep ensure
+      curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b $(go env GOPATH)/bin v1.27.0
+      go mod download -x
       make DOCKER_REGISTRY=$(DOCKER_REGISTRY) PRESIDIO_LABEL=$(Build.BuildID) test-functional
     workingDirectory: "$(modulePath)"
     displayName: "Build & Test "
