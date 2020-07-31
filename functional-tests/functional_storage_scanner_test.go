@@ -185,7 +185,7 @@ func TestResultWrittenToStorage(t *testing.T) {
 		},
 	}
 
-	cloudStorage := cloudStorage.New(datasink)
+	cloudStorage := cloudstorage.New(datasink)
 	resultsPath := "someDir/SomeFile.txt"
 	anonymizeResponse := &types.AnonymizeResponse{
 		Text: "<Person> live is <Location>",
