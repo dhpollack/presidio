@@ -13,7 +13,7 @@ RUN cp -r ${PRESIDIOPATH}/${NAME}/cmd/${NAME}/testdata /usr/bin/testdata
 
 #----------------------------
 
-FROM alpine:3.8
+FROM alpine:3.12
 
 ARG NAME=presidio-tester
 WORKDIR  /usr/bin/

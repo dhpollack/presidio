@@ -11,7 +11,7 @@ RUN GOOS=linux GOARCH=amd64 CGO_ENABLED=0 && go build -ldflags '-X github.com/Mi
 
 #----------------------------
 
-FROM alpine:3.8
+FROM alpine:3.12
 
 ARG NAME=presidio-anonymizer
 WORKDIR  /usr/bin/

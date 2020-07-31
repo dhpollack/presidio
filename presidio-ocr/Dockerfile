@@ -11,7 +11,7 @@ RUN GOOS=linux GOARCH=amd64 CGO_ENABLED=1 && go build -ldflags '-X github.com/Mi
 
 #----------------------------
 
-FROM alpine:3.8
+FROM alpine:3.12
 
 RUN apk --update add tesseract-ocr
 
